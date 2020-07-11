@@ -1,0 +1,42 @@
+#!/usr/bin/python
+from picamera import PiCamera
+from time import sleep
+import cv2 as cv
+
+def main():
+    print("Welcome to MJ Raspi!")
+    print("Let's create something great!")
+
+def camera_test():
+    camera = PiCamera()
+
+    camera.start_preview()
+    sleep(5)
+    camera.capture("test.jpg")
+    camera.stop_preview()
+
+def test_cv2():
+    cap = cv.videoCapture(0)
+
+    while True:
+        ret, cap = cap.read()
+        print ret
+        if cap.isOpened() == False:
+            print("Video capture failed\n")
+        cv.imshow('test_cv2', cap)
+    cap.release()
+    cv.destroyAllWindows()
+
+
+def test_imshow():
+    cv.namedWindow("test_image")
+    image = cv.imread("/home/pi/test_program/test.jpg")
+    cv.imshow("test_image", image)
+    cv.waitKey(0)
+    cv.destroyAllWindows()
+
+if __name__ == "__main__":
+    main()
+    #camera_test()
+    test_cv2()
+    #test_imshow()
